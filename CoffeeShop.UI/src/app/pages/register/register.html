@@ -1,0 +1,29 @@
+<div class="container">
+
+  <div class="card">
+
+    <h1>☕ Coffee Shop Register</h1>
+
+    <input
+      type="email"
+      placeholder="Username"
+      [(ngModel)]="registerData.username">
+
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="registerData.password">
+
+    <button (click)="register()">
+      Register
+    </button>
+
+    <br><br>
+
+    <a routerLink="/login">
+      Already have an account? Login
+    </a>
+
+  </div>
+
+</div>

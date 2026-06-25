@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using CoffeeShop.API.DataDB;
+﻿using CoffeeShop.API.DataDB;
 using CoffeeShop.API.Models.Domain;
 using CoffeeShop.API.Models.Dto;
 using CoffeeShop.API.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 namespace CoffeeShop.API.Controllers
 {
     [Route("api/[controller]")]
@@ -19,8 +20,8 @@ namespace CoffeeShop.API.Controllers
             this.productRepository = productRepository;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [EnableRateLimiting("api")]
         public async Task<IActionResult> GetAllProducts()
         {
             var products = await productRepository.GetAllAsync();
@@ -52,6 +53,7 @@ namespace CoffeeShop.API.Controllers
             };
             return Ok(productDto);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
 
         public async Task<IActionResult> CreateProduct([FromBody] ProductDto productDto)

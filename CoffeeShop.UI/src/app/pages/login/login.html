@@ -1,0 +1,23 @@
+<div class="container">
+
+  <div class="card">
+
+    <h1>☕ Coffee Shop Login</h1>
+
+    <input
+      type="email"
+      placeholder="Username"
+      [(ngModel)]="loginData.username">
+
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="loginData.password">
+
+    <button (click)="login()">
+      Login
+    </button>
+
+  </div>
+
+</div>

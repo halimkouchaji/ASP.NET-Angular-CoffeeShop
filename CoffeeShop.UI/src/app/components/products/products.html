@@ -1,0 +1,183 @@
+<div class="container">
+<a routerLink="/order">
+  Go To Orders
+</a>
+
+<hr>
+
+<!-- Add Product -->
+<h2>Add Product</h2>
+
+<input
+  type="text"
+  [(ngModel)]="newProduct.name"
+  placeholder="Name">
+
+<input
+  type="number"
+  [(ngModel)]="newProduct.price"
+  placeholder="Price">
+
+<input
+  type="text"
+  [(ngModel)]="newProduct.description"
+  placeholder="Description">
+
+<button (click)="addProduct()">
+  Add Product
+</button>
+
+<hr>
+
+<!-- Search -->
+<h2>Search Product</h2>
+
+<input
+  type="text"
+  [(ngModel)]="searchName"
+  placeholder="Product name">
+
+<button (click)="searchProducts()">
+  Search
+</button>
+
+<hr>
+
+<!-- Filter by price -->
+<h2>Filter By Price</h2>
+
+<input
+  type="number"
+  [(ngModel)]="minPrice"
+  placeholder="Min price">
+
+<input
+  type="number"
+  [(ngModel)]="maxPrice"
+  placeholder="Max price">
+
+<button (click)="filterProducts()">
+  Filter
+</button>
+
+<hr>
+
+<!-- Low stock -->
+<h2>Low Stock</h2>
+
+<input
+  type="number"
+  [(ngModel)]="threshold"
+  placeholder="Stock threshold">
+
+<button (click)="getLowStock()">
+  Get Low Stock
+</button>
+
+<hr>
+
+<!-- Sort -->
+<h2>Sort By Price</h2>
+
+<select [(ngModel)]="ascending">
+
+  <option [ngValue]="true">
+    Price Low → High
+  </option>
+
+  <option [ngValue]="false">
+    Price High → Low
+  </option>
+
+</select>
+
+<button (click)="sortProducts()">
+  Sort
+</button>
+
+<hr>
+
+<!-- Products List -->
+<h2>Products</h2>
+
+<div class="products-grid">
+
+  <div
+    class="product-card"
+    *ngFor="let product of products">
+
+    <h3>{{ product.name }}</h3>
+
+    <p>
+      <strong>Price:</strong>
+      {{ product.price }}
+    </p>
+
+    <p>
+      {{ product.description }}
+    </p>
+
+    <button (click)="addToOrder(product)">
+      Add To Order
+    </button>
+
+    <button (click)="deleteProduct(product.id)">
+      Delete
+    </button>
+
+  </div>
+
+</div>
+
+<!-- Current Order -->
+<div class="order-box">
+
+  <h2>Current Order</h2>
+
+  <div *ngIf="selectedProducts.length === 0">
+    No products selected.
+  </div>
+
+  <div *ngFor="let item of selectedProducts">
+
+  <p>
+    {{ item.product.name }}
+  </p>
+
+  <p>
+    Price: {{ item.product.price }}
+  </p>
+
+  <p>
+    Quantity: {{ item.quantity }}
+  </p>
+
+  <button (click)="increaseQuantity(item)">
+    +
+  </button>
+
+  <button (click)="decreaseQuantity(item)">
+    -
+  </button>
+
+  <button (click)="removeFromOrder(item)">
+    Remove
+  </button>
+
+</div>
+
+  <h3>
+    Total:
+  {{ selectedProducts.reduce(
+     (sum, item) =>
+       sum + (item.product.price * item.quantity),
+     0
+   )
+}}
+  </h3>
+
+  <button (click)="createOrder()">
+    Create Order
+  </button>
+</div>
+</div>

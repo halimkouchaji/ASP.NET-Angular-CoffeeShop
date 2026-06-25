@@ -38,7 +38,7 @@ namespace CoffeeShop.API.Controllers
                     }
 
                 }
-                return Ok("User registered successfully");
+                return Ok(new { message = "User registered successfully" });
             }
             return BadRequest(result.Errors);
         }

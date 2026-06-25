@@ -1,0 +1,18 @@
+# Angular
+node_modules/
+dist/
+.angular/
+
+# ASP.NET
+bin/
+obj/
+
+# Visual Studio
+.vs/
+
+# Logs
+*.log
+
+# User files
+*.user
+*.suo
